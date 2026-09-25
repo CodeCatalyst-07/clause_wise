@@ -1,16 +1,37 @@
-# React + Vite
+# ClauseWise — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+The modern React 19 interface for **ClauseWise**, designed with an archival **"Legal Redline Dossier"** visual language.
 
-Currently, two official plugins are available:
+## Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** with **Vite**
+- **Vanilla CSS** with a comprehensive token system (`src/index.css`)
+- **Typography:**
+  - *Newsreader* (Google Fonts serif) for legal headings, summaries, and document excerpts
+  - *JetBrains Mono* for clause tags, metadata stamps, and badges
+  - *Inter* for functional UI controls, buttons, and inputs
+- **Design Tokens:** Archival vellum reading cards, ink-navy binder chrome, redline danger badges, amber warning accents
+- **Accessibility:** Full WCAG AA contrast compliance, keyboard focus rings, skip navigation link, ARIA landmarks and live regions
 
-## React Compiler
+## Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Install dependencies
+npm install
 
-## Expanding the Oxlint configuration
+# Run development server
+npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+# Run Vitest component tests
+npm test
+
+# Run accessibility linter
+npm run lint:a11y
+
+# Build production bundle
+npm run build
+```
+
+## Environment Variables
+
+- `VITE_API_BASE_URL`: URL to the ClauseWise backend (e.g. `http://localhost:8000` for local development, or your deployed Cloud Run/Render API URL).
