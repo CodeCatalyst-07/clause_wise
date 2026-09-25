@@ -1,17 +1,18 @@
 /*
- * ClauseWise — SummaryView Styles (The Legal Vellum Sheet)
+ * ClauseWise — SummaryView Styles (The Legal Dossier Summary)
  */
 
 .summary-view {
-  background: var(--paper-bg);
-  border: 1px solid var(--paper-border);
-  color: var(--paper-ink);
-  box-shadow: var(--shadow-paper);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  box-shadow: var(--shadow-dossier);
   position: relative;
   padding: 2.25rem 2rem;
+  border-radius: var(--radius-lg);
 }
 
-/* Subtle corner fold / binder clip ornament */
+/* Subtle notary gold header accent */
 .summary-view::before {
   content: "";
   position: absolute;
@@ -27,10 +28,10 @@
   font-family: var(--font-serif);
   font-size: 1.45rem;
   font-weight: 700;
-  color: var(--paper-ink);
+  color: #ffffff;
   letter-spacing: -0.01em;
   margin-bottom: 1.15rem;
-  border-bottom: 1px solid var(--paper-rule);
+  border-bottom: 1px solid var(--color-border);
   padding-bottom: 0.75rem;
 }
 
@@ -39,16 +40,16 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.4rem 1rem;
+  padding: 0.45rem 1.1rem;
   border-radius: 4px;
-  background: rgba(197, 155, 39, 0.08);
-  border: 1px solid rgba(197, 155, 39, 0.4);
+  background: rgba(197, 155, 39, 0.12);
+  border: 1px solid rgba(197, 155, 39, 0.45);
   margin-bottom: 1.25rem;
-  box-shadow: inset 0 0 4px rgba(197, 155, 39, 0.05);
+  box-shadow: inset 0 0 6px rgba(197, 155, 39, 0.1);
 }
 
 .badge-label {
-  color: var(--paper-muted);
+  color: #cbd5e1;
   font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -57,40 +58,43 @@
 }
 
 .badge-value {
-  color: #855c0c; /* Deep antique gold on paper (WCAG AA compliant) */
-  font-size: 0.88rem;
+  color: #fbbf24; /* Radiant Notary Gold (WCAG AA compliant >7:1) */
+  font-size: 0.92rem;
   font-weight: 700;
   font-family: var(--font-serif);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
 }
 
 /* ---- Summary Reading Typography ---- */
 .summary-content {
   margin-top: 1.25rem;
-  line-height: 1.8;
+  line-height: 1.85;
   font-family: var(--font-serif);
-  font-size: 1.02rem;
-  color: var(--paper-ink);
+  font-size: 1.05rem;
+  color: #f1f5f9; /* High-contrast crisp radiant text (14.5:1 on dark) */
 }
 
 .summary-paragraph {
-  margin-bottom: 0.95rem;
+  margin-bottom: 1.1rem;
+  color: #f1f5f9;
   text-align: justify;
   text-justify: inter-word;
 }
 
 .summary-bullet {
-  padding-left: 1.25rem;
+  padding-left: 1.35rem;
   position: relative;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.65rem;
   font-family: var(--font);
-  font-size: 0.92rem;
-  color: #243345;
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  line-height: 1.65;
 }
 
 .summary-bullet::before {
   content: "—";
   position: absolute;
   left: 0;
-  color: var(--paper-muted);
+  color: var(--color-accent);
+  font-weight: 700;
 }

@@ -5,37 +5,42 @@
 .translate-dropdown-wrapper {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
   flex-wrap: wrap;
-  margin-bottom: 0.85rem;
-  padding: 0.35rem 0.65rem;
-  background: rgba(20, 31, 46, 0.04);
-  border: 1px solid var(--paper-border);
+  margin-bottom: 0.95rem;
+  padding: 0.4rem 0.8rem;
+  background: rgba(8, 14, 23, 0.6);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
 }
 
 .translate-label {
-  font-size: 0.76rem;
-  color: var(--paper-muted);
-  font-weight: 600;
+  font-size: 0.78rem;
+  color: #94a3b8; /* Crisp slate label */
+  font-weight: 700;
   white-space: nowrap;
   font-family: var(--font);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
 .translate-select {
-  padding: 0.35rem 0.75rem;
-  border: 1px solid var(--paper-border);
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-sm);
-  background: #ffffff;
-  color: var(--paper-ink);
+  background: #090e17;
+  color: #f1f5f9; /* Crisp high-contrast text */
   font-family: var(--font);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 500;
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  max-width: 220px;
+  max-width: 240px;
+}
+
+.translate-select option {
+  background: #090e17;
+  color: #f1f5f9;
 }
 
 .translate-select:focus-visible {
@@ -49,14 +54,14 @@
 }
 
 .translate-status {
-  font-size: 0.78rem;
-  color: #855c0c;
+  font-size: 0.8rem;
+  color: #fbbf24; /* Radiant amber gold */
   font-style: italic;
   font-family: var(--font-serif);
 }
 
 .translate-error {
-  font-size: 0.78rem;
-  color: var(--color-redline);
+  font-size: 0.8rem;
+  color: #f87171;
   font-weight: 500;
 }
