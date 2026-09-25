@@ -1,0 +1,30 @@
+/*
+ * ClauseWise — DisclaimerBanner Styles (Statutory Docket Notice)
+ */
+
+.disclaimer-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(251, 191, 36, 0.04);
+  border: 1px solid rgba(197, 155, 39, 0.35);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.disclaimer-icon {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.disclaimer-text {
+  color: #fde68a; /* High contrast amber text (WCAG AAA > 11:1 on dark) */
+  font-size: 0.85rem;
+  line-height: 1.5;
+  font-family: var(--font);
+  letter-spacing: 0.01em;
+}

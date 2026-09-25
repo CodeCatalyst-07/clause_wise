@@ -1,0 +1,96 @@
+/*
+ * ClauseWise — SummaryView Styles (The Legal Vellum Sheet)
+ */
+
+.summary-view {
+  background: var(--paper-bg);
+  border: 1px solid var(--paper-border);
+  color: var(--paper-ink);
+  box-shadow: var(--shadow-paper);
+  position: relative;
+  padding: 2.25rem 2rem;
+}
+
+/* Subtle corner fold / binder clip ornament */
+.summary-view::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-accent), transparent 60%);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.summary-view h2 {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--paper-ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 1.15rem;
+  border-bottom: 1px solid var(--paper-rule);
+  padding-bottom: 0.75rem;
+}
+
+/* ---- Seal / Document Classification Stamp ---- */
+.doc-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  background: rgba(197, 155, 39, 0.08);
+  border: 1px solid rgba(197, 155, 39, 0.4);
+  margin-bottom: 1.25rem;
+  box-shadow: inset 0 0 4px rgba(197, 155, 39, 0.05);
+}
+
+.badge-label {
+  color: var(--paper-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-family: var(--font);
+}
+
+.badge-value {
+  color: #855c0c; /* Deep antique gold on paper (WCAG AA compliant) */
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  letter-spacing: 0.01em;
+}
+
+/* ---- Summary Reading Typography ---- */
+.summary-content {
+  margin-top: 1.25rem;
+  line-height: 1.8;
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  color: var(--paper-ink);
+}
+
+.summary-paragraph {
+  margin-bottom: 0.95rem;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.summary-bullet {
+  padding-left: 1.25rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+  font-family: var(--font);
+  font-size: 0.92rem;
+  color: #243345;
+}
+
+.summary-bullet::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--paper-muted);
+}

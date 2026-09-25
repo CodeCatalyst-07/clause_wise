@@ -1,0 +1,215 @@
+/*
+ * ClauseWise — ClauseList Styles (Legal Ledger & Redline Marginalia)
+ */
+
+.clause-list {
+  background: var(--paper-bg);
+  border: 1px solid var(--paper-border);
+  color: var(--paper-ink);
+  box-shadow: var(--shadow-paper);
+  position: relative;
+  padding: 2.25rem 2rem;
+}
+
+.clause-list::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--paper-redline), transparent 60%);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.clause-list h2 {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--paper-ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--paper-rule);
+  padding-bottom: 0.75rem;
+}
+
+/* ---- Ledger of Extracted Covenants (Typewriter Monospace) ---- */
+.fields-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--paper-border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.15rem;
+}
+
+.field-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px dashed var(--paper-rule);
+}
+
+.field-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.field-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font);
+}
+
+.field-value {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--paper-ink);
+  line-height: 1.55;
+}
+
+.field-empty {
+  color: #8c9ba9;
+  font-style: italic;
+  font-family: var(--font);
+}
+
+.field-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.field-list li {
+  background: rgba(20, 31, 46, 0.06);
+  border: 1px solid rgba(20, 31, 46, 0.15);
+  border-radius: 3px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  color: #172433;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO ELEMENT: REDLINE MARGIN NOTATIONS (ATTORNEY RED-PEN MARKUP)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.risk-flags-section {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.35rem;
+  background: var(--paper-redline-bg);
+  border: 1px solid var(--paper-redline-border);
+  border-left: 4px solid var(--paper-redline);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  box-shadow: 0 2px 10px rgba(185, 28, 28, 0.05);
+}
+
+.risk-flags-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--paper-redline);
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.01em;
+}
+
+.risk-flags-subtitle {
+  font-size: 0.82rem;
+  color: #6b2121;
+  font-style: italic;
+  margin-bottom: 0.85rem;
+  font-family: var(--font);
+}
+
+.risk-flags-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.risk-flag-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  background: #ffffff;
+  border: 1px solid rgba(185, 28, 28, 0.2);
+  border-left: 3px solid var(--paper-redline);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.88rem;
+  color: #3b1111;
+  line-height: 1.55;
+  font-family: var(--font);
+}
+
+.risk-flag-icon {
+  flex-shrink: 0;
+  color: var(--paper-redline);
+  font-size: 0.95rem;
+  margin-top: 0.1rem;
+}
+
+.risk-flag-label {
+  font-weight: 700;
+  color: var(--paper-redline);
+  font-size: 0.76rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  background: rgba(185, 28, 28, 0.1);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+}
+
+/* ---- Suggested Questions for a Lawyer (Counsel Interrogatories) ---- */
+.suggested-questions-section {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.35rem;
+  background: rgba(35, 59, 92, 0.05);
+  border: 1px solid rgba(35, 59, 92, 0.25);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.suggested-questions-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #172a42;
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.01em;
+}
+
+.suggested-questions-subtitle {
+  font-size: 0.82rem;
+  color: var(--paper-muted);
+  margin-bottom: 0.85rem;
+  font-family: var(--font);
+}
+
+.suggested-questions-list {
+  padding-left: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.suggested-question-item {
+  font-size: 0.88rem;
+  color: #1a2533;
+  line-height: 1.6;
+  font-family: var(--font-serif);
+  font-style: italic;
+  padding: 0.2rem 0;
+}

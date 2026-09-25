@@ -1,0 +1,49 @@
+# ============================================================
+# ClauseWise — Git Ignore Rules
+# ============================================================
+
+# ----- Secrets & credentials (NEVER commit these) -----
+.env
+.env.local
+.env.production
+credentials.json
+*-service-account*.json
+service-account*.json
+after-credit-acc-*.json
+*.key
+*.pem
+
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+
+# ----- Node / React -----
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# ----- IDE / OS -----
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ----- Uploaded / temporary data -----
+uploads/
+tmp/
+*.tmp
+
+# ----- Test / coverage artifacts -----
+.coverage
+htmlcov/
+.pytest_cache/

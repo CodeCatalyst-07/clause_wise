@@ -1,0 +1,28 @@
+# ClauseWise Backend — Python Dependencies
+# -----------------------------------------
+# Core framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+
+# Settings / config management
+pydantic-settings>=2.4.0
+
+# Testing
+pytest>=8.0.0
+httpx>=0.27.0          # required by FastAPI's TestClient
+
+# Google Cloud SDKs (needed in later phases — pinned now for reproducibility)
+google-genai>=1.0.0            # new unified Gemini SDK (replaces google-generativeai)
+google-cloud-documentai>=2.29.0
+google-cloud-translate>=3.16.0
+
+# Utilities
+python-dotenv>=1.0.0
+python-multipart>=0.0.9   # required for file uploads
+
+# Security / rate limiting
+slowapi>=0.1.9
+
+# Document parsing / PDF extraction
+pypdf>=5.0.0
+

@@ -1,0 +1,148 @@
+/*
+ * ClauseWise — Legal Redline Dossier Design System
+ *
+ * Grounded in legal materiality:
+ *   • Deep ink-navy outer binder chrome (#090e17 / #111a26)
+ *   • Vellum parchment paper for document reading sheet (#f5f2eb)
+ *   • Editorial serif (Newsreader) for judicial headings
+ *   • Monospace ledger (JetBrains Mono) for extracted covenants & terms
+ *   • Redline crimson (#b91c1c / #f87171) strictly for risk flags and statutory warnings
+ *   • Antique notary brass (#c59b27) for seals, badges, and active tab accents
+ *
+ * Accessibility:
+ *   • All contrast combinations meet WCAG AA (≥4.5:1 for body, ≥3:1 for large)
+ *   • Ink on paper achieves >13:1 contrast
+ *   • Visible keyboard focus rings on all interactive elements
+ */
+
+/* ---- Reset & base ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* ---- Legal Redline Palette ---- */
+  --color-bg: #090e17;               /* Deep ink navy background */
+  --color-surface: #111a26;          /* Folio binder dark container */
+  --color-surface-subtle: #172333;   /* Raised docket card */
+  --color-border: #223247;          /* Binder hairline rule */
+  --color-border-subtle: #192738;
+  --color-border-strong: #334863;
+
+  /* Typography Colors on Dark Chrome */
+  --color-text: #e6ebf2;            /* Primary light ink (≈14.8:1 on bg) */
+  --color-text-muted: #94a5bd;      /* Secondary docket graphite (≈6.2:1 on bg) */
+  --color-text-faint: #63758d;
+
+  /* Accents */
+  --color-primary: #233b5c;         /* Judicial Navy */
+  --color-primary-light: #7da5d9;   /* Slate Blue highlight */
+  --color-accent: #c59b27;          /* Notary Seal Antique Brass (≈6.8:1 on dark) */
+  --color-accent-subtle: rgba(197, 155, 39, 0.12);
+  --color-accent-hover: #ddb03a;
+
+  /* Redline Markup (Legal Risk Flags) */
+  --color-redline: #c92a2a;         /* Redline Crimson */
+  --color-redline-light: #f87171;   /* Redline on dark chrome (≈5.8:1 on dark) */
+  --color-warning: #fbbf24;         /* Amber statutory alert */
+  --color-error: #f87171;           /* Error crimson */
+  --color-success: #34d399;         /* Verified docket emerald */
+
+  /* ---- The Legal Vellum Sheet (Document Reading Area) ---- */
+  --paper-bg: #f5f2eb;              /* Archival bond paper */
+  --paper-surface: #ffffff;
+  --paper-ink: #141f2e;             /* Dense iron-gall ink (13.8:1 on paper) */
+  --paper-muted: #4e5e71;           /* Graphite notes (5.4:1 on paper) */
+  --paper-border: #ded7c8;          /* Paper edge ruling */
+  --paper-rule: #e8e2d4;            /* Ledger horizontal lines */
+  --paper-redline: #b91c1c;         /* Redline margin markup (5.2:1 on paper) */
+  --paper-redline-bg: rgba(185, 28, 28, 0.06);
+  --paper-redline-border: #fca5a5;
+
+  /* Radii & Shadows */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow-paper: 0 6px 24px -2px rgba(0, 0, 0, 0.35), 0 2px 6px -1px rgba(0, 0, 0, 0.2);
+  --shadow-dossier: 0 8px 30px -4px rgba(5, 10, 18, 0.6);
+
+  /* Fonts */
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", "Courier Prime", monospace;
+
+  /* Focus ring — crisp notary gold indicator */
+  --focus-ring: 0 0 0 2px var(--color-accent);
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(35, 59, 92, 0.22) 0%, transparent 75%),
+    linear-gradient(to bottom, #090e17 0%, #060a10 100%);
+  background-attachment: fixed;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ---- Global focus indicator ----
+ * High-visibility notary gold focus ring for keyboard navigation
+ */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ---- Screen-reader only (global utility) ---- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Skip link for keyboard users ---- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-accent);
+  color: #090e17;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0 0 6px 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font);
+  letter-spacing: 0.02em;
+  z-index: 1000;
+  transition: top 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}

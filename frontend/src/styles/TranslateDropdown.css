@@ -1,0 +1,62 @@
+/*
+ * ClauseWise — TranslateDropdown Styles (Archival Language Selector)
+ */
+
+.translate-dropdown-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+  padding: 0.35rem 0.65rem;
+  background: rgba(20, 31, 46, 0.04);
+  border: 1px solid var(--paper-border);
+  border-radius: var(--radius-sm);
+}
+
+.translate-label {
+  font-size: 0.76rem;
+  color: var(--paper-muted);
+  font-weight: 600;
+  white-space: nowrap;
+  font-family: var(--font);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.translate-select {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--paper-border);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  color: var(--paper-ink);
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  max-width: 220px;
+}
+
+.translate-select:focus-visible {
+  outline: 2px solid var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.translate-select:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.translate-status {
+  font-size: 0.78rem;
+  color: #855c0c;
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+.translate-error {
+  font-size: 0.78rem;
+  color: var(--color-redline);
+  font-weight: 500;
+}
