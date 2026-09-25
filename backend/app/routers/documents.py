@@ -194,40 +194,58 @@ async def upload(request: Request, file: UploadFile = File(...)) -> AnalysisResu
         _raise_error(exc.status_code, "file_validation_error", exc.detail)
 
     # ------------------------------------------------------------------
-    # Step 3: Extract text via Document AI (OCR).
-    # If Document AI encounters a billing issue, gracefully fallback
-    # to Gemini's native multimodal OCR so the application remains fully functional.
+    # Step 3: Extract text via Document AI (OCR) with resilient fallbacks.
+    # If Document AI encounters auth, billing, or network failures,
+    # gracefully fallback to local PDF extraction (pypdf) or Gemini multimodal OCR.
     # ------------------------------------------------------------------
+    extracted_text = ""
     try:
         extracted_text = extract_text_from_document(file_bytes, detected_mime)
     except DocAIServiceError as exc:
         err_msg = str(exc).lower()
-        if "billing" in err_msg or "billing_disabled" in err_msg:
-            logger.warning(
-                "Document AI billing is not enabled. Falling back to local/Gemini extraction: %s",
-                exc,
-            )
-            extracted_text = ""
-            if detected_mime == "application/pdf":
-                try:
-                    import io
-                    from pypdf import PdfReader
-                    reader = PdfReader(io.BytesIO(file_bytes))
-                    extracted_text = "\n\n".join(
-                        (p.extract_text() or "").strip() for p in reader.pages
-                    ).strip()
-                except Exception as pdf_err:
-                    logger.debug("Local pypdf extraction failed: %s", pdf_err)
-
-            if len(extracted_text) < 20:
-                try:
-                    extracted_text = extract_text_multimodal(file_bytes, detected_mime)
-                except GeminiServiceError as gemini_exc:
-                    logger.error("Gemini fallback OCR failed: %s", gemini_exc)
-                    _raise_error(502, "docai_service_error", str(exc))
-        else:
-            logger.error("Document AI error: %s", exc)
+        if "no extractable text" in err_msg:
+            # Document AI processed the document and confirmed it has no readable text
             _raise_error(502, "docai_service_error", str(exc))
+
+        logger.warning(
+            "Document AI extraction unavailable or failed (%s). Falling back...",
+            exc,
+        )
+        if detected_mime == "application/pdf":
+            try:
+                import io
+                from pypdf import PdfReader
+                reader = PdfReader(io.BytesIO(file_bytes))
+                pages_text = [(p.extract_text() or "").strip() for p in reader.pages]
+                extracted_text = "\n\n".join(t for t in pages_text if t).strip()
+                if extracted_text:
+                    logger.info("Extracted %d characters via local pypdf extraction", len(extracted_text))
+            except Exception as pdf_err:
+                logger.debug("Local pypdf extraction failed: %s", pdf_err)
+
+        if len(extracted_text) < 20:
+            try:
+                extracted_text = extract_text_multimodal(file_bytes, detected_mime)
+            except Exception as gemini_exc:
+                logger.error("Gemini fallback OCR failed: %s", gemini_exc)
+                _raise_error(502, "docai_service_error", str(exc))
+    except Exception as exc:
+        logger.warning("Unexpected error during document extraction: %s. Attempting fallback...", exc)
+        if detected_mime == "application/pdf":
+            try:
+                import io
+                from pypdf import PdfReader
+                reader = PdfReader(io.BytesIO(file_bytes))
+                pages_text = [(p.extract_text() or "").strip() for p in reader.pages]
+                extracted_text = "\n\n".join(t for t in pages_text if t).strip()
+            except Exception:
+                pass
+
+        if len(extracted_text) < 20:
+            try:
+                extracted_text = extract_text_multimodal(file_bytes, detected_mime)
+            except Exception:
+                _raise_error(502, "docai_service_error", str(exc))
 
     # ------------------------------------------------------------------
     # Step 4: Feed extracted text into the Phase 2.1 Gemini pipeline.

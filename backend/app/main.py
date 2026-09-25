@@ -50,6 +50,33 @@ async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
     )
 
 
+@app.exception_handler(Exception)
+async def unhandled_exception_handler(request: Request, exc: Exception):
+    """
+    Catch any unhandled exception, log it, and return a clean 500 response
+    with CORS headers so the browser does not disguise it as a CORS failure.
+    """
+    import logging
+    logger = logging.getLogger("app.main")
+    logger.exception("Unhandled server error: %s", exc)
+
+    origin = request.headers.get("origin")
+    headers = {}
+    if origin:
+        headers["Access-Control-Allow-Origin"] = origin
+        headers["Access-Control-Allow-Credentials"] = "true"
+
+    return JSONResponse(
+        status_code=500,
+        headers=headers,
+        content={
+            "error": "internal_server_error",
+            "detail": "An internal server error occurred while processing the document.",
+            "disclaimer": "This tool provides general legal information, not legal advice.",
+        },
+    )
+
+
 # ---------------------------------------------------------------------------
 # CORS — scoped to known frontend dev-server origins.
 #

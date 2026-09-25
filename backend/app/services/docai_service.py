@@ -69,14 +69,27 @@ def _get_client() -> documentai.DocumentProcessorServiceClient:
         client_options = {"api_endpoint": f"{location}-documentai.googleapis.com"}
         credentials = None
         if settings.google_application_credentials:
-            from google.oauth2 import service_account
-            credentials = service_account.Credentials.from_service_account_file(
-                settings.google_application_credentials
+            import os
+            if os.path.exists(settings.google_application_credentials):
+                try:
+                    from google.oauth2 import service_account
+                    credentials = service_account.Credentials.from_service_account_file(
+                        settings.google_application_credentials
+                    )
+                except Exception as cred_err:
+                    logger.warning("Could not load service account from file: %s", cred_err)
+            else:
+                logger.warning(
+                    "GOOGLE_APPLICATION_CREDENTIALS file not found: %s. Relying on default ADC.",
+                    settings.google_application_credentials,
+                )
+        try:
+            _client = documentai.DocumentProcessorServiceClient(
+                client_options=client_options,
+                credentials=credentials,
             )
-        _client = documentai.DocumentProcessorServiceClient(
-            client_options=client_options,
-            credentials=credentials,
-        )
+        except Exception as init_err:
+            raise DocAIServiceError(f"Could not initialize Document AI client: {init_err}") from init_err
     return _client
 
 
@@ -144,20 +157,19 @@ def extract_text_from_document(file_bytes: bytes, mime_type: str) -> str:
         DocAIServiceError: If Document AI fails, returns no text, or the
             extracted text is too short to be meaningful.
     """
-    client = _get_client()
-    processor_name = settings.docai_processor_id
-
-    # Build the request — file bytes stay in memory, never touch disk.
-    raw_document = documentai.RawDocument(
-        content=file_bytes,
-        mime_type=mime_type,
-    )
-    request = documentai.ProcessRequest(
-        name=processor_name,
-        raw_document=raw_document,
-    )
-
     try:
+        client = _get_client()
+        processor_name = settings.docai_processor_id
+
+        # Build the request — file bytes stay in memory, never touch disk.
+        raw_document = documentai.RawDocument(
+            content=file_bytes,
+            mime_type=mime_type,
+        )
+        request = documentai.ProcessRequest(
+            name=processor_name,
+            raw_document=raw_document,
+        )
         result = client.process_document(request=request)
     except Exception as exc:
         # Catch all Document AI failures (timeout, quota, auth, network)
