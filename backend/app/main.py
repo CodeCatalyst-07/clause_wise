@@ -65,17 +65,21 @@ _ALLOWED_ORIGINS = [
     f"http://localhost:{port}" for port in range(5173, 5181)
 ]
 if settings.allowed_origins:
-    _ALLOWED_ORIGINS.extend([
-        origin.strip()
-        for origin in settings.allowed_origins.split(",")
-        if origin.strip()
-    ])
+    if settings.allowed_origins.strip() == "*":
+        _ALLOWED_ORIGINS = ["*"]
+    else:
+        _ALLOWED_ORIGINS.extend([
+            origin.strip()
+            for origin in settings.allowed_origins.split(",")
+            if origin.strip()
+        ])
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_ALLOWED_ORIGINS,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
-    allow_methods=["GET", "POST"],   # Only methods we actually use
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 

@@ -85,7 +85,13 @@ def reset_client() -> None:
     _client = None
 
 
-FALLBACK_MODELS = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-2.5-flash"]
+FALLBACK_MODELS = [
+    "gemini-2.5-flash",
+    "gemini-3.5-flash",
+    "gemini-3.1-flash-lite",
+    "gemini-flash-lite-latest",
+    "gemini-3.5-flash-lite",
+]
 
 
 def _generate_content_resilient(
